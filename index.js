@@ -1,7 +1,6 @@
 'use strict';
 const electron = require('electron');
-
-const app = electron.app;
+const {app, BrowserWindow, ipcMain} = require('electron');
 
 // Adds debug features like hotkeys for triggering dev tools and reload
 require('electron-debug')();
@@ -42,3 +41,10 @@ app.on('activate', () => {
 app.on('ready', () => {
 	mainWindow = createMainWindow();
 });
+
+ipcMain.on('asyncChannelToMain', (event, arg) => {
+	console.log(arg + ' from renderer')
+	if (arg === 'hello') {
+	  event.sender.send('asyncChannelToRenderer', 'world')
+	}
+  })

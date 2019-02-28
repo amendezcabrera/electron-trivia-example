@@ -33,7 +33,9 @@
 				</div>
 			</div>
 		</div>
-		<a class="btn-floating btn-large waves-effect waves-light red"  id='btn-update-question' onclick="require('electron').ipcRenderer.send('load-data', 'hello')"><i class="material-icons">add</i></a>
+		<div id='fab-container'>
+			<a class="btn-floating btn-large waves-effect waves-light red" style="float: right;"  id='btn-update-question' onclick="require('electron').ipcRenderer.send('load-data', 'hello')"><i class="material-icons">add</i></a>
+		</div>
 		<script type="text/javascript" src="js/materialize.min.js"></script>
 	</body>
 </html>

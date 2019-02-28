@@ -28,7 +28,7 @@ function createMainWindow() {
 }
 
 async function loadData() { 
-	const response = await axios.post('https://opentdb.com/api.php?amount=1', '');
+	const response = await axios.post('https://opentdb.com/api.php?amount=1&type=multiple', '');
 	console.log(response.data.results);
 	return response.data.results[0];
 }

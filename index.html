@@ -4,26 +4,33 @@
 		<meta charset="utf-8">
 		<title>Electron boilerplate</title>
 		<link rel="stylesheet" href="index.css">
+		<link rel="stylesheet" href="css/photon.css">
 		<script>
 			const {ipcRenderer} = require('electron');
 			ipcRenderer.on('load-data-result', (event, arg) => {
 				console.log(arg.question);
-				var test = document.getElementById('question');
-				test.innerHTML = arg.question;
+				document.getElementById('question').innerHTML = arg.question;
+				document.getElementById('answer1').innerHTML = arg.correct_answer;
+				document.getElementById('answer2').innerHTML = arg.incorrect_answers[0];
+				document.getElementById('answer3').innerHTML = arg.incorrect_answers[1];
+				document.getElementById('answer4').innerHTML = arg.incorrect_answers[2];
 			});
 		  </script>		
 	</head>
 	<body>
-		<div class="container">
-			<header>
-				<h2 id='question'>Question</h2>
+		<div class="window">
+			<header class="toolbar toolbar-header">
+				<h1 class="title" id="question">Question</h1>
 			</header>
-			<section class="main">
-				<div><p>Responses</p></div>
-			</section>
-			<footer>
-					<button onclick="require('electron').ipcRenderer.send('load-data', 'hello')">Update!</button>
-			</footer>
+			<div class="window-content">
+				<div class="pane" id="answer1">Answer 1</div>
+				<div class="pane" id="answer2">Answer 2</div>
+				<div class="pane" id="answer3">Answer 3</div>
+				<div class="pane" id="answer4">Answer 4</div>
+			</div>
+			<footer class="toolbar toolbar-footer">
+				<button class="btn btn-default" id='btn-update-question' onclick="require('electron').ipcRenderer.send('load-data', 'hello')">Update!</button>
+			</footer>			
 		</div>
 	</body>
 </html>

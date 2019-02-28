@@ -4,14 +4,26 @@
 		<meta charset="utf-8">
 		<title>Electron boilerplate</title>
 		<link rel="stylesheet" href="index.css">
+		<script>
+			const {ipcRenderer} = require('electron');
+			ipcRenderer.on('load-data-result', (event, arg) => {
+				console.log(arg.question);
+				var test = document.getElementById('question');
+				test.innerHTML = arg.question;
+			});
+		  </script>		
 	</head>
 	<body>
 		<div class="container">
 			<header>
-				<h1>Electron boilerplate</h1>
+				<h2 id='question'>Question</h2>
 			</header>
-			<section class="main"></section>
-			<footer></footer>
+			<section class="main">
+				<div><p>Responses</p></div>
+			</section>
+			<footer>
+					<button onclick="require('electron').ipcRenderer.send('load-data', 'hello')">Update!</button>
+			</footer>
 		</div>
 	</body>
 </html>

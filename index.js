@@ -57,15 +57,8 @@ app.on('window-all-closed', () => {
 	}
 });
 
-app.on('activate', () => {
-	if (!mainWindow) {
-		mainWindow = createMainWindow();
-	}
-});
-
 app.on('ready', () => {
 	mainWindow = createMainWindow();
-	//getResultData();
 });
 
 ipcMain.on('load-data', async (event, arg) => {

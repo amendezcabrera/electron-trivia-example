@@ -23,7 +23,7 @@ function createMainWindow() {
 		width: 500,
 		height: 600
 	});
-	win.loadURL(`file://${__dirname}/index.html`);
+	win.loadURL(`file://${__dirname}/renderer/index.html`);
 	win.on('closed', onClosed);
 	return win;
 }

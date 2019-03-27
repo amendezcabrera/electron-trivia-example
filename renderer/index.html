@@ -6,17 +6,7 @@
 		<!--Import Google Icon Font-->
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 		<!--Import materialize.css-->
-		<link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
-		<script>
-			const {ipcRenderer} = require('electron');
-			ipcRenderer.on('load-data-result', (event, arg) => {
-				document.getElementById('question').innerHTML = arg.question;
-				document.getElementById('answer1').innerHTML = arg.randomized_answers[0];
-				document.getElementById('answer2').innerHTML = arg.randomized_answers[1];
-				document.getElementById('answer3').innerHTML = arg.randomized_answers[2];
-				document.getElementById('answer4').innerHTML = arg.randomized_answers[3];
-			});
-		  </script>		
+		<link type="text/css" rel="stylesheet" href="../css/materialize.min.css"  media="screen,projection"/>
 	</head>
 	<body>
 		<section>
@@ -37,7 +27,7 @@
 		<div id='fab-container'>
 			<a class="btn-floating btn-large waves-effect waves-light red" style="float: right; right:15px;"  id='btn-update-question' onclick="ipcRenderer.send('load-data', 'hello')"><i class="material-icons">add</i></a>
 		</div>
-		<script type="text/javascript" src="js/materialize.min.js">
-		</script>
+		<script type="text/javascript" src="../js/materialize.min.js"></script>
+		<script src="./index.js"></script>
 	</body>
 </html>

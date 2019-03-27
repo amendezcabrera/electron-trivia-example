@@ -17,8 +17,8 @@ function onClosed() {
 
 function createMainWindow() {
 	const win = new electron.BrowserWindow({
-		width: 600,
-		height: 400
+		width: 500,
+		height: 600
 	});
 
 	win.loadURL(`file://${__dirname}/index.html`);
@@ -32,6 +32,18 @@ async function loadData() {
 	console.log(response.data.results);
 	return response.data.results[0];
 }
+
+function handleReceivedAnswers(receivedCorrectAnswer, receivedIncorrectAnswers) {
+	var newAnswersArray = receivedIncorrectAnswers;
+	newAnswersArray.push(receivedCorrectAnswer);
+	newAnswersArray = shuffle(newAnswersArray);
+	return newAnswersArray;
+}
+
+function shuffle(o) {
+	for(var j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
+	return o;
+};
 
 app.on('window-all-closed', () => {
 	if (process.platform !== 'darwin') {
@@ -47,10 +59,15 @@ app.on('activate', () => {
 
 app.on('ready', () => {
 	mainWindow = createMainWindow();
-	loadData();
+	//getResultData();
 });
 
 ipcMain.on('load-data', async (event, arg) => {
-	const data = await loadData();
-	event.sender.send('load-data-result', data)
+	event.sender.send('load-data-result', (await getResultData()));
 });
+
+async function getResultData() {
+	const data = await loadData();
+	data['randomized_answers'] = handleReceivedAnswers(data.correct_answer, data.incorrect_answers);
+	return await data;
+}

@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "devtron": "^1.4.0",
     "electron-debug": "^2.0.0"
   },
   "author": "",

@@ -10,31 +10,32 @@
 		<script>
 			const {ipcRenderer} = require('electron');
 			ipcRenderer.on('load-data-result', (event, arg) => {
-				console.log(arg.question);
 				document.getElementById('question').innerHTML = arg.question;
-				document.getElementById('answer1').innerHTML = arg.correct_answer;
-				document.getElementById('answer2').innerHTML = arg.incorrect_answers[0];
-				document.getElementById('answer3').innerHTML = arg.incorrect_answers[1];
-				document.getElementById('answer4').innerHTML = arg.incorrect_answers[2];
+				document.getElementById('answer1').innerHTML = arg.randomized_answers[0];
+				document.getElementById('answer2').innerHTML = arg.randomized_answers[1];
+				document.getElementById('answer3').innerHTML = arg.randomized_answers[2];
+				document.getElementById('answer4').innerHTML = arg.randomized_answers[3];
 			});
 		  </script>		
 	</head>
 	<body>
 		<section>
-				<h3 class="header center blue-text" id="question">Question</h3>
+				<h5 class="header center blue-text" id="question">Question</h5>
 		</section>
 		<div class="container">
 			<div class="section">
 				<div class="row">
-					<div class="col s3 m3"><div id="answer1">Answer 1</div></div>
-					<div class="col s3 m3"><div id="answer2">Answer 2</div></div>
-					<div class="col s3 m3"><div id="answer3">Answer 3</div></div>
-					<div class="col s3 m3"><div id="answer4">Answer 4</div></div>
+					<div class="collection">
+						<a class="collection-item"><div id="answer1">Answer 1</div></li>
+						<a class="collection-item"><div id="answer2">Answer 2</div></li>
+						<a class="collection-item"><div id="answer3">Answer 3</div></li>
+						<a class="collection-item"><div id="answer4">Answer 4</div></li>
+					</div>					
 				</div>
 			</div>
 		</div>
 		<div id='fab-container'>
-			<a class="btn-floating btn-large waves-effect waves-light red" style="float: right;"  id='btn-update-question' onclick="require('electron').ipcRenderer.send('load-data', 'hello')"><i class="material-icons">add</i></a>
+			<a class="btn-floating btn-large waves-effect waves-light red" style="float: right; right:15px;"  id='btn-update-question' onclick="ipcRenderer.send('load-data', 'hello')"><i class="material-icons">add</i></a>
 		</div>
 		<script type="text/javascript" src="js/materialize.min.js"></script>
 	</body>

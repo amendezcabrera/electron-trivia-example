@@ -33,6 +33,12 @@ async function loadData() {
 	return response.data.results[0];
 }
 
+async function getResultData() {
+	const data = await loadData();
+	data['randomized_answers'] = handleReceivedAnswers(data.correct_answer, data.incorrect_answers);
+	return await data;
+}
+
 function handleReceivedAnswers(receivedCorrectAnswer, receivedIncorrectAnswers) {
 	var newAnswersArray = receivedIncorrectAnswers;
 	newAnswersArray.push(receivedCorrectAnswer);
@@ -65,9 +71,3 @@ app.on('ready', () => {
 ipcMain.on('load-data', async (event, arg) => {
 	event.sender.send('load-data-result', (await getResultData()));
 });
-
-async function getResultData() {
-	const data = await loadData();
-	data['randomized_answers'] = handleReceivedAnswers(data.correct_answer, data.incorrect_answers);
-	return await data;
-}

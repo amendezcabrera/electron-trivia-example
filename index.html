@@ -26,10 +26,10 @@
 			<div class="section">
 				<div class="row">
 					<div class="collection">
-						<a class="collection-item"><div id="answer1">Answer 1</div></li>
-						<a class="collection-item"><div id="answer2">Answer 2</div></li>
-						<a class="collection-item"><div id="answer3">Answer 3</div></li>
-						<a class="collection-item"><div id="answer4">Answer 4</div></li>
+						<a class="collection-item"><div id="answer1" onclick="ipcRenderer.send('answer', document.getElementById(this.id).innerHTML)">Answer 1</div></li>
+						<a class="collection-item"><div id="answer2" onclick="ipcRenderer.send('answer', document.getElementById(this.id).innerHTML)">Answer 2</div></li>
+						<a class="collection-item"><div id="answer3" onclick="ipcRenderer.send('answer', document.getElementById(this.id).innerHTML)">Answer 3</div></li>
+						<a class="collection-item"><div id="answer4" onclick="ipcRenderer.send('answer', document.getElementById(this.id).innerHTML)">Answer 4</div></li>
 					</div>					
 				</div>
 			</div>
@@ -37,6 +37,7 @@
 		<div id='fab-container'>
 			<a class="btn-floating btn-large waves-effect waves-light red" style="float: right; right:15px;"  id='btn-update-question' onclick="ipcRenderer.send('load-data', 'hello')"><i class="material-icons">add</i></a>
 		</div>
-		<script type="text/javascript" src="js/materialize.min.js"></script>
+		<script type="text/javascript" src="js/materialize.min.js">
+		</script>
 	</body>
 </html>
